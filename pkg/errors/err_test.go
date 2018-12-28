@@ -20,10 +20,22 @@ func TestCircleArea(t *testing.T) {
 			nil,
 			math.Pi,
 		},
+		// Radius of 3; no error
+		{
+			3,
+			nil,
+			9 * math.Pi,
+		},
+		// Radius of 0; no error
+		{
+			0,
+			nil,
+			0,
+		},
 		// Radius of -1; error
 		{
 			-1,
-			errors.New("area calculation failed, radius is <0"),
+			errors.New("area calculation failed, radius -1.00 is less than 0"),
 			0,
 		},
 	}
@@ -35,9 +47,9 @@ func TestCircleArea(t *testing.T) {
 		if table.expErr == nil {
 			assert.NilError(t, err)
 			assert.Assert(t, math.Abs(area - table.expArea) < 0.0001)
+		// Otherwise check that the error message is as expected
 		} else {
-			// Check that the error message is as expected
-			assert.ErrorContains(t, err, "area calculation failed, radius is <0")
+			assert.ErrorContains(t, err, table.expErr.Error())
 		}
 	}
 }
