@@ -74,5 +74,7 @@ func TestSortedUniqueIntSlice(t *testing.T) {
 
 func ExampleSortedUniqueIntSlice() {
 	fmt.Println(SortedUniqueIntSlice([]int{100, 5, -2, 5, 5, 3, -2, 100, 0}))
+	fmt.Println(SortedUniqueIntSlice([]int{-2, 0}))
 	// Output: [-2 0 3 5 100]
+	// [-2 0]
 }
